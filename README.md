@@ -24,21 +24,23 @@ learning-notes/
 
 ## 项目索引
 
-| 项目 | 状态 | 说明 |
-|---|---|---|
+| 项目             | 状态  | 说明                                           |
+| -------------- | --- | -------------------------------------------- |
 | [dsh/](./dsh/) | 进行中 | 《DeepSeek Harness 技术入门与架构原理》· Datawhale 组队学习 |
 
 ### dsh · DeepSeek Harness
 
-官方课程：https://www.datawhale.cn/learn/content/381/7900
+官方课程：<https://www.datawhale.cn/learn/content/381/7900?from=kkframenew>
+
+
 
 - **Task1 · 为什么 Agent 不只是"大模型 + 工具"**（导读 + 第 1 章）→ [dsh/task1/](./dsh/task1/)
   - 核心一句话：模型只生成 Token，Harness 把"说"变成"做"——DSH 开放的是组织方式，不是具体内容。
 
 ## 在线阅读
 
-开启 GitHub Pages 后可访问：
+已开启 GitHub Pages：
 
-- 首页：`https://<用户名>.github.io/learning-notes/`
-- Task1 概念讲解页：`https://<用户名>.github.io/learning-notes/dsh/task1/concepts.html`
-- Task1 作业A 示意图：`https://<用户名>.github.io/learning-notes/dsh/task1/homework-a.html`
+- 首页：https://xizijun-cmd.github.io/learning-notes/
+- Task1 概念讲解页：https://xizijun-cmd.github.io/learning-notes/dsh/task1/concepts.html
+- Task1 作业A 示意图：https://xizijun-cmd.github.io/learning-notes/dsh/task1/homework-a.html
