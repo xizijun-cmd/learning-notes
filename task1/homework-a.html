@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>作业A：Model → Harness → 外部世界</title>
+<style>
+  body { margin: 0; background: #ffffff; display: flex; justify-content: center; font-family: "Microsoft YaHei", sans-serif; }
+  svg { max-width: 1180px; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1200 920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="600" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1a1a1a">Model → Harness → 外部世界</text>
+  <text x="600" y="78" text-anchor="middle" font-size="15" fill="#666">模型只生成 Token，Harness 把"说"变成"做"</text>
+
+  <!-- Model 框 -->
+  <rect x="60" y="130" width="250" height="130" rx="12" fill="#e8f0fe" stroke="#4a7ddb" stroke-width="2"/>
+  <text x="185" y="170" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">Model</text>
+  <text x="185" y="200" text-anchor="middle" font-size="15" fill="#333">生成 Token（大脑）</text>
+  <text x="185" y="226" text-anchor="middle" font-size="14" fill="#666">负责"想"：思考、拆解、</text>
+  <text x="185" y="246" text-anchor="middle" font-size="14" fill="#666">决定调哪个工具</text>
+
+  <!-- Harness 框 -->
+  <rect x="460" y="110" width="300" height="170" rx="12" fill="#fff3e0" stroke="#e8902a" stroke-width="2.5"/>
+  <text x="610" y="150" text-anchor="middle" font-size="24" font-weight="bold" fill="#1a1a1a">Harness</text>
+  <text x="610" y="180" text-anchor="middle" font-size="15" fill="#333">组织与约束（挽具）</text>
+  <text x="610" y="206" text-anchor="middle" font-size="14" fill="#666">不思考、不判断</text>
+  <text x="610" y="234" text-anchor="middle" font-size="14" fill="#8a5a00">职责① 连接模型与外部世界</text>
+  <text x="610" y="258" text-anchor="middle" font-size="14" fill="#8a5a00">职责② 约束能做什么、怎样做、留下什么状态</text>
+
+  <!-- 外部世界 框 -->
+  <rect x="910" y="130" width="250" height="130" rx="12" fill="#e6f4ea" stroke="#3d9d63" stroke-width="2"/>
+  <text x="1035" y="170" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a1a">外部世界</text>
+  <text x="1035" y="200" text-anchor="middle" font-size="15" fill="#333">代码 / Shell / Web（四肢）</text>
+  <text x="1035" y="226" text-anchor="middle" font-size="14" fill="#666">提供工具与交互环境</text>
+  <text x="1035" y="246" text-anchor="middle" font-size="14" fill="#666">真正对外做功</text>
+
+  <!-- 箭头：Model → Harness -->
+  <line x1="310" y1="170" x2="455" y2="170" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="382" y="158" text-anchor="middle" font-size="14" fill="#444">请求 / 上下文</text>
+  <!-- 箭头：Harness → Model（回传） -->
+  <line x1="455" y1="235" x2="310" y2="235" stroke="#444" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+  <text x="382" y="256" text-anchor="middle" font-size="14" fill="#444">结果喂回模型</text>
+
+  <!-- 箭头：Harness → 外部世界 -->
+  <line x1="760" y1="170" x2="905" y2="170" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="832" y="158" text-anchor="middle" font-size="14" fill="#444">工具 / 执行</text>
+  <!-- 箭头：外部世界 → Harness（回传） -->
+  <line x1="905" y1="235" x2="760" y2="235" stroke="#444" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+  <text x="832" y="256" text-anchor="middle" font-size="14" fill="#444">结果回传</text>
+
+  <!-- Harness 组织的六要素（原文图 0-2） -->
+  <text x="600" y="312" text-anchor="middle" font-size="14" fill="#8a5a00">Harness 负责组织的六要素（原文图 0-2）</text>
+  <g font-size="14" fill="#5a4a2a">
+    <rect x="240" y="324" width="110" height="34" rx="17" fill="#fff9ec" stroke="#e8b96f" stroke-width="1.2"/>
+    <text x="295" y="346" text-anchor="middle">Context</text>
+    <rect x="362" y="324" width="110" height="34" rx="17" fill="#fff9ec" stroke="#e8b96f" stroke-width="1.2"/>
+    <text x="417" y="346" text-anchor="middle">Tools</text>
+    <rect x="484" y="324" width="110" height="34" rx="17" fill="#fff9ec" stroke="#e8b96f" stroke-width="1.2"/>
+    <text x="539" y="346" text-anchor="middle">State</text>
+    <rect x="606" y="324" width="110" height="34" rx="17" fill="#fff9ec" stroke="#e8b96f" stroke-width="1.2"/>
+    <text x="661" y="346" text-anchor="middle">Loop</text>
+    <rect x="728" y="324" width="110" height="34" rx="17" fill="#fff9ec" stroke="#e8b96f" stroke-width="1.2"/>
+    <text x="783" y="346" text-anchor="middle">Policy</text>
+    <rect x="850" y="324" width="110" height="34" rx="17" fill="#fff9ec" stroke="#e8b96f" stroke-width="1.2"/>
+    <text x="905" y="346" text-anchor="middle">Execution</text>
+  </g>
+
+  <!-- 分隔标题 -->
+  <text x="600" y="400" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a1a1a">Harness 要解决的 6 个问题</text>
+
+  <!-- 6 个问题框：2 行 × 3 列 -->
+  <!-- 1 -->
+  <rect x="60" y="430" width="340" height="110" rx="10" fill="#f5f7fa" stroke="#9aa7b8" stroke-width="1.5"/>
+  <text x="230" y="463" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">① 意图解析 + 执行</text>
+  <text x="230" y="491" text-anchor="middle" font-size="14" fill="#555">把模型的"我要读文件"</text>
+  <text x="230" y="515" text-anchor="middle" font-size="14" fill="#555">翻译成真实的外部调用</text>
+  <!-- 2 -->
+  <rect x="430" y="430" width="340" height="110" rx="10" fill="#f5f7fa" stroke="#9aa7b8" stroke-width="1.5"/>
+  <text x="600" y="463" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">② 失败重试 / 兜底</text>
+  <text x="600" y="491" text-anchor="middle" font-size="14" fill="#555">工具报错：重试还是放弃？</text>
+  <text x="600" y="515" text-anchor="middle" font-size="14" fill="#555">谁来决定</text>
+  <!-- 3 -->
+  <rect x="800" y="430" width="340" height="110" rx="10" fill="#f5f7fa" stroke="#9aa7b8" stroke-width="1.5"/>
+  <text x="970" y="463" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">③ 结果回传</text>
+  <text x="970" y="491" text-anchor="middle" font-size="14" fill="#555">外部结果怎么喂回模型？</text>
+  <text x="970" y="515" text-anchor="middle" font-size="14" fill="#555">太长塞不进上下文，谁来裁剪</text>
+  <!-- 4 -->
+  <rect x="60" y="565" width="340" height="110" rx="10" fill="#f5f7fa" stroke="#9aa7b8" stroke-width="1.5"/>
+  <text x="230" y="598" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">④ Loop 控制</text>
+  <text x="230" y="626" text-anchor="middle" font-size="14" fill="#555">什么时候继续、什么时候喊停</text>
+  <text x="230" y="650" text-anchor="middle" font-size="14" fill="#555">模型陷入死循环怎么办</text>
+  <!-- 5 -->
+  <rect x="430" y="565" width="340" height="110" rx="10" fill="#f5f7fa" stroke="#9aa7b8" stroke-width="1.5"/>
+  <text x="600" y="598" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">⑤ 返回最终结果</text>
+  <text x="600" y="626" text-anchor="middle" font-size="14" fill="#555">任务完成后</text>
+  <text x="600" y="650" text-anchor="middle" font-size="14" fill="#555">结果怎么交还给用户</text>
+  <!-- 6 -->
+  <rect x="800" y="565" width="340" height="110" rx="10" fill="#f5f7fa" stroke="#9aa7b8" stroke-width="1.5"/>
+  <text x="970" y="598" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">⑥ 拦截 / 授权 / 拒绝</text>
+  <text x="970" y="626" text-anchor="middle" font-size="14" fill="#555">模型想调未注册、无权限的工具</text>
+  <text x="970" y="650" text-anchor="middle" font-size="14" fill="#555">怎么拦、谁来批</text>
+
+  <!-- 底部一句话 -->
+  <rect x="60" y="715" width="1080" height="80" rx="12" fill="#fff9ec" stroke="#e8902a" stroke-width="1.5"/>
+  <text x="600" y="750" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a1a1a">一句话：模型负责"想"，Harness 负责"做"——凡是"模型做不到、必须有人兜"的，都是 Harness 的问题</text>
+  <text x="600" y="778" text-anchor="middle" font-size="14" fill="#8a5a00">Agent Performance = f ( Model, Harness, Tools, Context, Policy, Environment )</text>
+
+  <!-- 脚注 -->
+  <text x="600" y="845" text-anchor="middle" font-size="13" fill="#999">依据：《DeepSeek Harness 技术入门与架构原理》导读 0.1 / 图 0-2 ；问题清单为个人学习笔记整理</text>
+</svg>
+</body>
+</html>
