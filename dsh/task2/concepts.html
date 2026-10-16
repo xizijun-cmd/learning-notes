@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task2 · 从零开始运行 DSH —— 概念展示</title>
+<style>
+:root{
+  --bg:#faf8f3; --ink:#2b2b2b; --muted:#6b6b6b; --line:#e6e0d4; --card:#ffffff;
+  --std:#4a7ddb; --std-bg:#e8f0fe;
+  --ptc:#d9534f; --ptc-bg:#fdeceb;
+  --min:#8a8a8a; --min-bg:#f0f0ee;
+  --cre:#8e6fc1; --cre-bg:#f1ebfa;
+  --accent:#e8902a; --accent-bg:#fff3e0;
+  --good:#3d9d63; --good-bg:#e6f4ea;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.75}
+h1,h2,h3{font-family:Georgia,"Songti SC","SimSun",serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+section{padding:60px 0 6px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.on{opacity:1;transform:none}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:999px;white-space:nowrap}
+nav a:hover{background:var(--accent-bg);color:var(--accent)}
+nav .brand{font-weight:bold;color:var(--ink);margin-right:auto}
+
+.hero{padding:80px 0 36px;text-align:center}
+.hero .tag{display:inline-block;font-size:13px;color:var(--accent);background:var(--accent-bg);border:1px solid #f0d5ae;padding:4px 14px;border-radius:999px;margin-bottom:20px}
+.hero h1{font-size:38px;line-height:1.3;margin-bottom:14px}
+.hero p.sub{color:var(--muted);font-size:16px;margin-bottom:30px}
+.core{max-width:780px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:22px 26px;text-align:left;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.core b{color:var(--accent)}
+.core .from{font-size:13px;color:var(--muted);margin-top:10px}
+
+.kicker{font-size:13px;letter-spacing:2px;color:var(--accent);font-weight:bold;margin-bottom:8px}
+.kicker small{letter-spacing:0;color:var(--muted);font-weight:normal;margin-left:8px}
+h2{font-size:27px;margin-bottom:16px}
+h3{font-size:18px;margin:24px 0 10px}
+p.lead{color:#444;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}.hero h1{font-size:29px}}
+.oneline{margin-top:14px;background:var(--accent-bg);border:1px dashed #e8b96f;border-radius:10px;padding:12px 16px;font-size:15px}
+.oneline b{color:#b96f00}
+code{background:#f1ede3;border-radius:5px;padding:1px 6px;font-size:.92em;font-family:Consolas,monospace}
+pre{background:#2b2b2b;color:#e8e2d5;border-radius:12px;padding:16px 18px;font-size:13.5px;line-height:1.7;overflow-x:auto;font-family:Consolas,monospace}
+pre .cm{color:#8a8578}
+
+/* 环境链 */
+.env{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.env .step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:14px}
+.env .step b{color:var(--std)}
+.env .arr{color:#b0a88f}
+
+/* Preset 对照 */
+.ptabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.ptabs button{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:8px 20px;font-size:14.5px;cursor:pointer;font-family:inherit;color:var(--muted);transition:all .2s}
+.ptabs button.act[data-p="std"]{background:var(--std-bg);border-color:var(--std);color:var(--std);font-weight:bold}
+.ptabs button.act[data-p="ptc"]{background:var(--ptc-bg);border-color:var(--ptc);color:var(--ptc);font-weight:bold}
+.ptabs button.act[data-p="min"]{background:var(--min-bg);border-color:var(--min);color:#555;font-weight:bold}
+.ptabs button.act[data-p="cre"]{background:var(--cre-bg);border-color:var(--cre);color:var(--cre);font-weight:bold}
+.ppanel{display:none}
+.ppanel.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.ppanel .tools{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.ppanel .tools span{border-radius:999px;padding:5px 13px;font-size:13.5px;background:#f3efe6;border:1px solid var(--line)}
+.ppanel .tools span.net{background:var(--good-bg);border-color:#bfe0cb;color:var(--good)}
+.ppanel .tools span.skill{background:var(--cre-bg);border-color:#d9c8f0;color:var(--cre)}
+.note{font-size:14px;color:#444;background:#fbfaf6;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:8px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+@media(max-width:760px){.grid3{grid-template-columns:1fr}}
+.grid3 .card h3{margin-top:0;font-size:16px}
+.grid3 .card p{font-size:13.5px;color:#444}
+
+/* 轨迹时间线 */
+.lane{margin-bottom:18px}
+.lane .lhead{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.lane .lname{font-weight:bold;font-size:15px;min-width:76px}
+.lane .lmeta{font-size:12.5px;color:var(--muted)}
+.tl{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.tl .tk{font-size:12.5px;border-radius:7px;padding:5px 10px;border:1.5px solid;white-space:nowrap}
+.tl .tk.bash{background:#eef3fb;border-color:#9dbcf2;color:#3a63b0}
+.tl .tk.write{background:var(--good-bg);border-color:#8fc7a4;color:#2c7a4b}
+.tl .tk.read{background:#eef7ef;border-color:#a8d5b4;color:#2c7a4b}
+.tl .tk.code{background:var(--accent-bg);border-color:#e8b96f;color:#b96f00;font-weight:bold}
+.tl .tk.err{background:var(--ptc-bg);border-color:var(--ptc);color:var(--ptc);font-weight:bold}
+.tl .sub{font-size:11.5px;color:var(--muted)}
+.tl .sep{color:#c9c2b2}
+
+/* 条形对比 */
+.bars{margin-top:12px}
+.brow{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:14px}
+.brow .bl{width:76px;text-align:right;font-size:13px;color:#555;flex:none}
+.brow .btrack{flex:1;background:#f0ede5;border-radius:6px;height:22px;overflow:hidden}
+.brow .bfill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:12px;color:#fff;min-width:30px}
+.bfill.f-std{background:var(--std)} .bfill.f-ptc{background:var(--ptc)}
+.bfill.f-min{background:var(--min)} .bfill.f-cre{background:var(--cre)}
+
+/* 自述 vs 实际 */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+@media(max-width:760px){.vs{grid-template-columns:1fr}}
+.vs .said{border-top:4px solid var(--ptc)}
+.vs .fact{border-top:4px solid var(--good)}
+.vs h3{margin-top:0}
+.vs .verdict{font-size:13px;color:var(--muted)}
+
+/* 自测 */
+details.quiz{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+details.quiz summary{cursor:pointer;padding:16px 20px;font-size:16px;font-weight:bold;list-style:none;display:flex;gap:10px;align-items:baseline}
+details.quiz summary::before{content:"👉";font-size:14px}
+details.quiz summary .qn{color:var(--accent);font-size:13px;flex:none}
+details.quiz .ans{padding:0 20px 18px 44px;font-size:15px;color:#333;border-top:1px dashed var(--line);padding-top:12px}
+details.quiz .ans b{color:var(--accent)}
+.quizhint{font-size:13px;color:var(--muted);margin-bottom:14px}
+
+/* 速记 */
+.memo{counter-reset:m;list-style:none}
+.memo li{position:relative;padding:11px 15px 11px 50px;background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:9px;font-size:15px}
+.memo li::before{counter-increment:m;content:counter(m);position:absolute;left:13px;top:11px;width:25px;height:25px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+
+.nextstep{background:linear-gradient(135deg,#fff9ec,#f7f2e7);border:1px solid #ecd9ae;border-radius:14px;padding:22px 26px}
+.nextstep b{color:#b96f00}
+footer{margin-top:64px;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">DSH · Task2</a>
+    <a href="#s1">环境与 Workspace</a>
+    <a href="#s2">模型接入</a>
+    <a href="#s3">4 套 Preset</a>
+    <a href="#s4">轨迹差分</a>
+    <a href="#s5">自述 vs 实际</a>
+    <a href="#s6">Benchmark</a>
+    <a href="#s7">自测</a>
+    <a href="#s8">速记</a>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="tag">DeepSeek Harness 技术入门 · 第 2 章 · 从零开始运行 DSH</div>
+  <h1>别信"嘴上说的"，<br>要看"实际发生的"</h1>
+  <p class="sub">把 DSH 跑起来，用 Trace 而非模型自述，验证 Preset 到底改了什么</p>
+  <div class="core">
+    <b>核心一句话：</b>Task2 是"动手"——Task1 讲了"Harness 负责组织方式"，本章把它落地成三样可摸的东西：<b>Workspace（现实世界）→ Preset（组合方式）→ 模型接入（可替换能力）</b>。
+    <div class="from">承接 Task1：上章只讲了"开放的是组织方式"这个结论，本章让你亲眼看到它。</div>
+  </div>
+</header>
+
+<!-- S1 环境与 Workspace -->
+<section class="wrap reveal" id="s1">
+  <div class="kicker">01 · 环境与 Workspace<small>对应书中 2.1 / 2.2</small></div>
+  <h2>Workspace 是 Agent 的"现实世界"</h2>
+  <p class="lead">模型自己碰不到任何文件。它能看到哪些文件、能改哪些文件、Shell 在哪个目录跑——全部由 Workspace 决定。这也是 Task1 留下的 10 问中 ①"能看什么上下文" ③"工具在哪执行" 的答案。</p>
+  <div class="env">
+    <div class="step">Node <b>≥ 22.19</b><br><small>实测 v22.23.3（WSL）</small></div>
+    <span class="arr">→</span>
+    <div class="step"><code>npx @deepseek-ai/dsh web</code><br><small>一条命令启动</small></div>
+    <span class="arr">→</span>
+    <div class="step">访问 <b>127.0.0.1:3080</b><br><small>Web UI</small></div>
+    <span class="arr">→</span>
+    <div class="step">空目录 <b>dsh-lab</b><br><small>先实验，别在真项目里试</small></div>
+  </div>
+  <div class="oneline"><b>安全习惯：</b>只在空目录实验；报错先截图再求助。本次实验各 Preset 各占一个子目录（standard / ptc / minimal / creative），互不污染。</div>
+</section>
+
+<!-- S2 模型接入 -->
+<section class="wrap reveal" id="s2">
+  <div class="kicker">02 · 模型接入<small>对应书中 2.3</small></div>
+  <h2>模型不是 DSH 本体，是可替换的一项能力</h2>
+  <p class="lead">DSH 是 Harness（运行框架），模型是通过 Provider / Model Adapter 挂进来的一项能力——今天挂 MiniMax，明天换 DeepSeek，Harness 不用动。这正呼应 Task1 的"一切皆插件：我要的是'模型'这种能力，不关心由谁实现"。</p>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h3 style="margin-top:0">本次接入</h3><p style="font-size:14.5px;color:#444">MiniMax 2.7 highspeed（云端 API），设置 → 模型 → 添加自定义提供方。</p></div>
+    <div class="card"><h3 style="margin-top:0">书中演示</h3><p style="font-size:14.5px;color:#444">vllm 本地部署 Qwen + openai-responses 协议。本地跑不动大模型就换云端 API，<b>协议必须与服务商实际实现一致</b>。</p></div>
+  </div>
+</section>
+
+<!-- S3 4 套 Preset 能力对照 -->
+<section class="wrap reveal" id="s3">
+  <div class="kicker">03 · 实验 1 · 能力对照<small>对应书中 2.4 / 表 2-1</small></div>
+  <h2>4 套 Preset：同一个 Harness，四种"打开方式"</h2>
+  <p class="lead">方法：4 个 Session 分别选 4 套 Preset，问"你当前可以使用哪些能力"。<b>注意：下面写的是 Trace 自述，可不可信要看第 5 节的交叉验证。</b>点标签切换：</p>
+
+  <div class="ptabs">
+    <button data-p="std" class="act" onclick="swPreset('std')">Standard 标准</button>
+    <button data-p="ptc" onclick="swPreset('ptc')">PTC</button>
+    <button data-p="min" onclick="swPreset('min')">Minimal 极简</button>
+    <button data-p="cre" onclick="swPreset('cre')">Creative 创意</button>
+  </div>
+
+  <div class="ppanel on" id="p-std">
+    <div class="card">
+      <div class="tools"><span>bash</span><span>read</span><span>write</span><span>edit</span><span>glob</span><span>grep</span></div>
+      <div class="note">上下文：系统提示 + runtime-context（workspace-write 沙箱策略）。<b>工具直接可调用</b>——这是"标准打开方式"。</div>
+    </div>
+  </div>
+  <div class="ppanel" id="p-ptc">
+    <div class="card">
+      <div class="tools"><span>run_code</span><span style="background:var(--accent-bg);border-color:#e8b96f;color:#b96f00">（bash / read / write / edit 藏在 run_code 内部）</span></div>
+      <div class="note">自述原话：工具"通过 <code>run_code</code> 调用"。<b>同一套能力，换了个代码式的门面</b>——PTC = Standard + Code Mode 工具呈现（官方目录 <code>code/</code>）。</div>
+    </div>
+  </div>
+  <div class="ppanel" id="p-min">
+    <div class="card">
+      <div class="tools"><span>bash</span><span style="opacity:.6">文件操作（自述笼统：读取 / 编辑 / 创建）</span></div>
+      <div class="note">清单最短、描述最笼统。<b>自述说"能创建文件"——真的吗？</b>看下面第 5 节的交叉验证。</div>
+    </div>
+  </div>
+  <div class="ppanel" id="p-cre">
+    <div class="card">
+      <div class="tools"><span>bash</span><span>read</span><span>write</span><span>edit</span><span>glob</span><span>grep</span><span class="net">web_search</span><span class="net">web_fetch</span><span class="skill">Skill: agent-experience</span></div>
+      <div class="note">上下文多出 <code>&lt;system-reminder&gt;</code> 声明可用 Skills。<b>独有网络搜索能力</b>——四套里能力最多的一套。</div>
+    </div>
+  </div>
+
+  <div class="oneline"><b>一句话：</b>差异不在"有没有能力"，而在<b>暴露哪些、以什么方式呈现</b>。</div>
+
+  <h3>三个设计边界（2.4.2）</h3>
+  <div class="grid3">
+    <div class="card">
+      <h3>① 存在 ≠ 呈现</h3>
+      <p>PTC 没删工具，只改了 <b>model-facing presentation</b>（摆在模型面前的样子）：write 从"货架上"挪进了 run_code 这个"柜子"。</p>
+    </div>
+    <div class="card">
+      <h3>② Preset ≠ System Prompt</h3>
+      <p>Prompt 只是 Preset 五个格子（Persona / Prompt / Tools / Service / Runtime 行为）之一。在 Prompt 里写"你可以联网"，没挂 web_search 就是<b>空口白话</b>。</p>
+    </div>
+    <div class="card">
+      <h3>③ Host 共享 · Session 独立</h3>
+      <p>1 栋楼 + 4 个房间：Web UI、模型配置、工具注册表<b>共享</b>；每个 Session 的子目录和对话记录<b>各自独立</b>。机制共享，内容独立。</p>
+    </div>
+  </div>
+</section>
+
+<!-- S4 实验 2 轨迹差分 -->
+<section class="wrap reveal" id="s4">
+  <div class="kicker">04 · 实验 2 · 执行轨迹差分<small>对应书中 2.4.3 / 表 2-2</small></div>
+  <h2>同一道题，四种解法</h2>
+  <p class="lead">任务：读目录 → 建 3 个文本文件 → 统计总行数 → 摘要。任务没规定文件内容，所以各模式行数不同很正常——<b>比的是轨迹和方式，不是数值</b>。</p>
+
+  <h3>工具调用轨迹（每个色块 = 一次调用）</h3>
+  <div class="card">
+    <div class="lane">
+      <div class="lhead"><span class="lname" style="color:var(--std)">Standard</span><span class="lmeta">2 轮 · 5 次调用 · 12 行</span></div>
+      <div class="tl">
+        <span class="tk bash">bash: ls</span><span class="sep">→</span>
+        <span class="tk write">write ×3</span><span class="sep">→</span>
+        <span class="tk bash">bash: wc -l</span><span class="sep">→</span><span class="sub">摘要 ✅</span>
+      </div>
+    </div>
+    <div class="lane">
+      <div class="lhead"><span class="lname" style="color:var(--ptc)">PTC</span><span class="lmeta">4 轮 · 12+ 次调用 · 11 行</span></div>
+      <div class="tl">
+        <span class="tk err">write ✗</span><span class="tk err">write ✗</span><span class="sub">UNKNOWN_TOOL</span><span class="sep">→</span>
+        <span class="sub">自我纠正</span><span class="sep">→</span>
+        <span class="tk code">run_code{write×3}</span><span class="sep">→</span>
+        <span class="tk code">run_code{read×3 计数}</span><span class="sep">→</span><span class="sub">摘要 ✅</span>
+      </div>
+    </div>
+    <div class="lane">
+      <div class="lhead"><span class="lname" style="color:#666">Minimal</span><span class="lmeta">2 轮 · 5 次调用 · 10 行</span></div>
+      <div class="tl">
+        <span class="tk bash">bash: ls</span><span class="sep">→</span>
+        <span class="tk bash">bash: echo &gt; ×3</span><span class="sep">→</span>
+        <span class="tk bash">bash: wc -l</span><span class="sep">→</span><span class="sub">摘要 ✅（无 write 工具，全程 shell）</span>
+      </div>
+    </div>
+    <div class="lane">
+      <div class="lhead"><span class="lname" style="color:var(--cre)">Creative</span><span class="lmeta">2 轮 · 5 次调用 · 7 行</span></div>
+      <div class="tl">
+        <span class="tk bash">bash: ls</span><span class="sep">→</span>
+        <span class="tk write">write ×3</span><span class="sep">→</span>
+        <span class="tk bash">bash: wc -l</span><span class="sep">→</span><span class="sub">摘要 ✅（内容发挥更自由）</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>代价对比：轮次与调用次数</h3>
+  <div class="card bars">
+    <div class="brow"><span class="bl">Standard</span><div class="btrack"><div class="bfill f-std" style="width:33%">2 轮 / 5 次</div></div></div>
+    <div class="brow"><span class="bl">PTC</span><div class="btrack"><div class="bfill f-ptc" style="width:100%">4 轮 / 12+ 次</div></div></div>
+    <div class="brow"><span class="bl">Minimal</span><div class="btrack"><div class="bfill f-min" style="width:33%">2 轮 / 5 次</div></div></div>
+    <div class="brow"><span class="bl">Creative</span><div class="btrack"><div class="bfill f-cre" style="width:33%">2 轮 / 5 次</div></div></div>
+  </div>
+
+  <div class="oneline"><b>读图：</b>PTC 那两个红色块是全章最值钱的证据——write <b>存在</b>（run_code 里能调），但<b>直接调就报错</b>。存在没变，呈现变了。代价是轮次翻倍（模型要先学会新界面），换来的是"一段代码编排多件事"的能力。</div>
+</section>
+
+<!-- S5 自述 vs 实际 -->
+<section class="wrap reveal" id="s5">
+  <div class="kicker">05 · 自述 vs 实际<small>交叉验证 · 自测问题 1 的活证据</small></div>
+  <h2>Minimal 的"自述"不可信</h2>
+  <div class="vs">
+    <div class="card said">
+      <h3>它说的（自述）</h3>
+      <p style="font-size:14.5px;color:#444">"我当前可以使用以下能力：1. 文件操作——读取文件、<b>编辑文件、创建文件</b>；2. Bash 命令执行……"</p>
+      <div class="verdict">听起来挺全，对吧？</div>
+    </div>
+    <div class="card fact">
+      <h3>它做的（Trace）</h3>
+      <p style="font-size:14.5px;color:#444">实验 2 建文件用的是 <code>echo -e "…" &gt; file1.txt</code>——<b>它根本没有 write 工具</b>，是用 shell 重定向硬凑的。</p>
+      <div class="verdict">自述含糊地说"创建文件"，实际能力打了折。</div>
+    </div>
+  </div>
+  <div class="oneline"><b>为什么自述会错：</b>模型的工具是 Harness 装配的，它自己并不知道被配了哪些——自述 = 猜，会漏报、多报、模糊合并。<b>所以证据只能看 Trace 的客观调用记录。</b></div>
+</section>
+
+<!-- S6 Benchmark -->
+<section class="wrap reveal" id="s6">
+  <div class="kicker">06 · Benchmark 为什么选 Minimal<small>对应书中 2.5</small></div>
+  <h2>纯模型强 ≠ 放进任何 Runtime 都强</h2>
+  <p class="lead">同一个引擎，装进跑车和卡车，成绩不一样。Agent 的表现 = f(模型, Harness, 工具, 上下文, 策略, 环境)——模型只是<b>六个变量之一</b>。本次实验同一个 MiniMax，塞进 4 套 Preset 行为就完全不同，就是活证据。</p>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h3 style="margin-top:0">Model Benchmark</h3><p style="font-size:14.5px;color:#444">只测纯模型（答题、推理分）。变量只有模型一个。</p></div>
+    <div class="card"><h3 style="margin-top:0">Agent Benchmark</h3><p style="font-size:14.5px;color:#444">测"模型 + Runtime"整体。官方选 <b>Minimal</b>：砍掉 Harness 的花样，结果才逼近"测模型本身"。</p></div>
+  </div>
+  <div class="oneline"><b>一句话：</b>Benchmark 里 Harness 越"隐形"，越知道模型几斤几两；Harness 越强，越分不清功劳是谁的。</div>
+</section>
+
+<!-- S7 自测 -->
+<section class="wrap reveal" id="s7">
+  <div class="kicker">07 · 自测</div>
+  <h2>合上答案，先自己说一遍</h2>
+  <p class="quizhint">用法：先别看答案，口头回答，再点开对照。说不顺的那题，回去看对应小节。</p>
+
+  <details class="quiz">
+    <summary><span class="qn">Q1</span>为什么"模型对自身能力的说明"不能当证据？应该看什么？</summary>
+    <div class="ans">模型的工具是 Harness 装配的，它不知道被配了哪些，自述 = 猜（漏报 / 多报 / 模糊合并）。例：Minimal 自称"能创建文件"，实际没有 write、用 <code>echo &gt;</code> 重定向。<b>应该看 Trace 的客观调用记录。</b></div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q2</span>Preset 改变的是"能力是否存在"还是"能力如何呈现"？两者是几件事？</summary>
+    <div class="ans"><b>两件事</b>：存在 = 能力在不在；呈现 = 怎么暴露、以什么接口用。Preset 改的是呈现。例：PTC 的 write 存在（run_code 里能调），直接调却报 UNKNOWN_TOOL——存在没变，呈现变了。</div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q3</span>纯模型 Benchmark 很强，放进任何 Agent Runtime 都会同样强吗？</summary>
+    <div class="ans"><b>不一定。</b>表现 = f(模型, Harness, 工具, 上下文, 策略, 环境)，模型只是变量之一。同一个 MiniMax 塞进 4 套 Preset 行为就不同。这正是 Agent Benchmark 存在、且官方选 Minimal 的原因。</div>
+  </details>
+</section>
+
+<!-- S8 速记 + 启下 -->
+<section class="wrap reveal" id="s8">
+  <div class="kicker">08 · 速记清单</div>
+  <h2>合上书，记住这 8 条</h2>
+  <ol class="memo">
+    <li>环境：Node ≥ 22.19 → npx 一条命令 → 127.0.0.1:3080</li>
+    <li>Workspace = Agent 的"现实世界"，只在空目录实验</li>
+    <li>模型是 Runtime 可替换的一项能力，不是 DSH 本体</li>
+    <li>Preset 改"能力如何呈现"，不改"能力是否存在"（两件事）</li>
+    <li>PTC = Standard + Code Mode 工具呈现（官方目录 code/）</li>
+    <li>Minimal 自述"能创建文件"实际没有 write——取证只看 Trace</li>
+    <li>PTC 的 write 存在但直接调报 UNKNOWN_TOOL——存在 ≠ 呈现的铁证</li>
+    <li>Model Benchmark ≠ Agent Benchmark，选 Minimal 是减少 Harness 变量</li>
+  </ol>
+
+  <div class="nextstep" style="margin-top:22px">
+    <b>下一步（Task3 预告）</b>：本章看到了 4 套 Preset 的能力差异，但只知其然——差异在<b>机制哪一层</b>实现的？Trace 里看不见的 hook / 拦截逻辑怎么揭示？亲手加一个 Skill / Tool / Hook，真正理解"一切皆插件"。→ 对应学习路径第 3–5 步。
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    依据：《DeepSeek Harness 技术入门与架构原理》第 2 章（2.1–2.5）· 实验数据为 2026-10-16 实测（WSL · Node v22.23.3 · MiniMax 2.7 highspeed）<br>
+    承接 <b>Task1 概念页</b> · 结合个人学习笔记整理生成 · 单文件离线网页
+  </div>
+</footer>
+
+<script>
+function swPreset(p){
+  document.querySelectorAll('.ptabs button').forEach(function(b){ b.classList.toggle('act', b.dataset.p===p); });
+  document.querySelectorAll('.ppanel').forEach(function(x){ x.classList.toggle('on', x.id==='p-'+p); });
+}
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
