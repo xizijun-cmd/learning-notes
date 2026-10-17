@@ -123,4 +123,4 @@
 2. 4 套 Preset（Standard/PTC/Minimal/Creative）能力到底差在哪？**从 Trace 取证，别信模型自述**。
 3. 为什么官方 Benchmark 选 Minimal？
 
-→ 对应学习路径第 1–2 步「跑起来 → 4 套 Preset」。
+→ 对应学习路径第 1–2 步「跑起来 → 4 套 Preset」。→ [进入 Task2](../task2/)

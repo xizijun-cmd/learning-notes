@@ -321,6 +321,12 @@ footer{margin-top:64px;padding:24px 0 40px;border-top:1px solid var(--line);colo
     <div class="card"><h3 style="margin-top:0">Model Benchmark</h3><p style="font-size:14.5px;color:#444">只测纯模型（答题、推理分）。变量只有模型一个。</p></div>
     <div class="card"><h3 style="margin-top:0">Agent Benchmark</h3><p style="font-size:14.5px;color:#444">测"模型 + Runtime"整体。官方选 <b>Minimal</b>：砍掉 Harness 的花样，结果才逼近"测模型本身"。</p></div>
   </div>
+  <div class="note" style="margin-top:14px">
+    <b>三个容易踩的反向判断（原文 2.5）：</b><br>
+    ① 同一模型在 Standard 下表现更好，可能是 Harness 的功劳，别归给模型；<br>
+    ② 复杂 Harness 导致性能下降（多余 Tool Call、更长执行链），也别怪模型——我的 PTC 实验 4 轮、12+ 次调用就是例子；<br>
+    ③ 所以研究 Agent 除问"什么模型"，还要问"什么 Harness、什么工具 / 上下文 / 策略"。
+  </div>
   <div class="oneline"><b>一句话：</b>Benchmark 里 Harness 越"隐形"，越知道模型几斤几两；Harness 越强，越分不清功劳是谁的。</div>
 </section>
 
@@ -367,7 +373,7 @@ footer{margin-top:64px;padding:24px 0 40px;border-top:1px solid var(--line);colo
 <footer>
   <div class="wrap">
     依据：《DeepSeek Harness 技术入门与架构原理》第 2 章（2.1–2.5）· 实验数据为 2026-10-16 实测（WSL · Node v22.23.3 · MiniMax 2.7 highspeed）<br>
-    承接 <b>Task1 概念页</b> · 结合个人学习笔记整理生成 · 单文件离线网页
+    承接 <a href="../task1/concepts.html" style="color:var(--accent);text-decoration:underline">Task1 概念页</a> · 结合个人学习笔记整理生成 · 单文件离线网页
   </div>
 </footer>
 
