@@ -5,130 +5,136 @@
 <title>Task3 作业①：Host Plane / Agent Plane 分层图</title>
 <style>
   body{margin:0;background:#fff;display:flex;justify-content:center;font-family:"Microsoft YaHei","PingFang SC",sans-serif}
-  svg{max-width:1180px;width:100%;height:auto}
+  svg{max-width:1240px;width:100%;height:auto}
 </style>
 </head>
 <body>
-<svg viewBox="0 0 1000 810" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 1160 900" xmlns="http://www.w3.org/2000/svg">
 <defs>
-  <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-    <path d="M0,0 L7,3 L0,6 Z" fill="#8a8578"/>
+  <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3.5" orient="auto">
+    <path d="M0,0 L8,3.5 L0,7 Z" fill="#c0562a"/>
   </marker>
 </defs>
 
-<text x="500" y="42" text-anchor="middle" font-size="22" font-weight="bold" fill="#2b2b2b">Host Plane / Agent Plane 分层图</text>
-<text x="500" y="68" text-anchor="middle" font-size="14" fill="#6b6b6b">以 Standard 组合项为例：10 项能力 → 12 个标注条目</text>
+<text x="580" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#2b2b2b">Standard 的 12 项能力：谁在配，谁在干</text>
+<text x="580" y="66" text-anchor="middle" font-size="13.5" fill="#6b6b6b">左边 = 这个会话自己配的；右边 = 全进程共用的；橙色 5 项 = 必须跨层执行的工具</text>
+<text x="580" y="92" text-anchor="middle" font-size="12.5" fill="#9a8f78">读图顺序：① 左边看这个会话配了什么 → ② 找橙色 5 个工具 → ③ 顺着箭头看右边谁真正执行</text>
 
-<rect x="40" y="90" width="400" height="640" rx="16" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
-<text x="64" y="122" font-size="17" font-weight="bold" fill="#633806">Agent Plane · 会话层</text>
-<text x="64" y="144" font-size="12.5" fill="#854F0B">决定当前会话：给模型看什么、怎么看</text>
+<rect x="40" y="110" width="440" height="710" rx="18" fill="#FDF6EC" stroke="#E0C9A0" stroke-width="1.2"/>
+<rect x="680" y="110" width="440" height="710" rx="18" fill="#EFF6FE" stroke="#A8C8EA" stroke-width="1.2"/>
 
-<rect x="560" y="90" width="400" height="640" rx="16" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-<text x="584" y="122" font-size="17" font-weight="bold" fill="#0C447C">Host Plane · 宿主层</text>
-<text x="584" y="144" font-size="12.5" fill="#185FA5">决定系统：谁真正提供和执行</text>
+<text x="64" y="142" font-size="17" font-weight="bold" fill="#8a5a00">Agent Plane（会话层）</text>
+<text x="64" y="164" font-size="12.5" fill="#9a7a45">这间房自己的装修：给模型看什么、怎么用</text>
 
-<g font-size="13.5" fill="#2b2b2b">
-  <rect x="60" y="165" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="188">Persona / Instructions</text>
-  <text x="404" y="188" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Agent</text>
+<text x="704" y="142" font-size="17" font-weight="bold" fill="#0C447C">Host Plane（宿主层）</text>
+<text x="704" y="164" font-size="12.5" fill="#4a6f96">整栋楼的水电：谁真正提供和执行</text>
 
-  <rect x="60" y="209" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="232">Prompt Sections</text>
-  <text x="404" y="232" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Preset</text>
+<!-- 右：顶部说明区（替代原共享设施列表，避免与下方组标题重叠） -->
+<rect x="700" y="184" width="400" height="146" rx="10" fill="#fff" stroke="#D6E6F5" stroke-width="0.6"/>
+<text x="718" y="210" font-size="13" font-weight="bold" fill="#185FA5">右边分两块，别看混：</text>
+<text x="718" y="236" font-size="12.5" fill="#4a6f96">· 中间 5 项 = 执行方：替模型真正干活</text>
+<text x="718" y="260" font-size="12.5" fill="#4a6f96">· 下面 4 项 = 共享设施：注册表、路由、</text>
+<text x="736" y="282" font-size="12.5" fill="#4a6f96">存储、沙箱，全进程共用</text>
+<text x="718" y="310" font-size="12.5" fill="#9a7a45">左侧只有 5 个工具要来找执行方，</text>
+<text x="718" y="330" font-size="12.5" fill="#9a7a45">其余能力都活在会话里，不需要执行方。</text>
 
-  <rect x="60" y="253" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="276">Skill Catalog</text>
-  <text x="404" y="276" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Preset</text>
+<!-- ===== 左：① 角色与提示词 ===== -->
+<rect x="56" y="182" width="4" height="14" fill="#BA7517"/>
+<text x="68" y="194" font-size="12.5" font-weight="bold" fill="#8a5a00">① 角色与提示词　跟随 Agent / Preset</text>
 
-  <rect x="60" y="297" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="320">tool-fs　文件读写</text>
-  <text x="404" y="320" text-anchor="end" font-size="11.5" fill="#8a7a5a">模型可见</text>
+<rect x="56" y="204" width="408" height="36" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="227" font-size="13.5" fill="#2b2b2b">Persona / Instructions（人设与指令）</text>
 
-  <rect x="60" y="341" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="364">tool-bash　Shell 执行</text>
-  <text x="404" y="364" text-anchor="end" font-size="11.5" fill="#8a7a5a">模型可见</text>
+<rect x="56" y="248" width="408" height="36" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="271" font-size="13.5" fill="#2b2b2b">Prompt Sections（提示词段落）</text>
 
-  <rect x="60" y="385" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="408">tool-web　搜索 / 网页</text>
-  <text x="404" y="408" text-anchor="end" font-size="11.5" fill="#8a7a5a">模型可见</text>
+<rect x="56" y="292" width="408" height="36" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="315" font-size="13.5" fill="#2b2b2b">Skill Catalog（技能目录）</text>
 
-  <rect x="60" y="429" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="452">tool-goal　规划 / 目标</text>
-  <text x="404" y="452" text-anchor="end" font-size="11.5" fill="#8a7a5a">模型可见</text>
+<!-- ===== 左：② 工具（跨层） ===== -->
+<rect x="56" y="352" width="4" height="14" fill="#D85A30"/>
+<text x="68" y="364" font-size="12.5" font-weight="bold" fill="#a8401f">② 面向模型的工具　这 5 个必须落到 Host 执行</text>
 
-  <rect x="60" y="473" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="496">tool-subagent　子 Agent</text>
-  <text x="404" y="496" text-anchor="end" font-size="11.5" fill="#8a7a5a">模型可见</text>
+<rect x="56" y="374" width="408" height="36" rx="8" fill="#FDEEE8" stroke="#E8956F" stroke-width="0.9"/>
+<text x="74" y="397" font-size="13.5" fill="#2b2b2b">tool-fs（文件读写工具）</text>
 
-  <rect x="60" y="517" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="540">Plan / Goal 会话状态</text>
-  <text x="404" y="540" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Session</text>
+<rect x="56" y="418" width="408" height="36" rx="8" fill="#FDEEE8" stroke="#E8956F" stroke-width="0.9"/>
+<text x="74" y="441" font-size="13.5" fill="#2b2b2b">tool-bash（Shell 命令执行）</text>
 
-  <rect x="60" y="561" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="584">Workflow 会话状态</text>
-  <text x="404" y="584" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Session</text>
+<rect x="56" y="462" width="408" height="36" rx="8" fill="#FDEEE8" stroke="#E8956F" stroke-width="0.9"/>
+<text x="74" y="485" font-size="13.5" fill="#2b2b2b">tool-web（联网搜索 / 抓取）</text>
 
-  <rect x="60" y="605" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="628">Context / Compaction 上下文管理</text>
-  <text x="404" y="628" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Agent / Session</text>
+<rect x="56" y="506" width="408" height="36" rx="8" fill="#FDEEE8" stroke="#E8956F" stroke-width="0.9"/>
+<text x="74" y="529" font-size="13.5" fill="#2b2b2b">tool-goal（规划 / 目标管理）</text>
 
-  <rect x="60" y="649" width="360" height="36" rx="8" fill="#fff" stroke="#e0c9a0" stroke-width="0.8"/>
-  <text x="76" y="672">Interaction 交互</text>
-  <text x="404" y="672" text-anchor="end" font-size="11.5" fill="#8a7a5a">跟随 Preset</text>
+<rect x="56" y="550" width="408" height="36" rx="8" fill="#FDEEE8" stroke="#E8956F" stroke-width="0.9"/>
+<text x="74" y="573" font-size="13.5" fill="#2b2b2b">tool-subagent（派生子 Agent）</text>
+
+<!-- ===== 左：③ 会话级状态 ===== -->
+<rect x="56" y="612" width="4" height="14" fill="#BA7517"/>
+<text x="68" y="624" font-size="12.5" font-weight="bold" fill="#8a5a00">③ 会话级状态　跟随 Session</text>
+
+<rect x="56" y="634" width="408" height="36" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="657" font-size="13.5" fill="#2b2b2b">Plan / Goal 状态（计划与目标状态）</text>
+
+<rect x="56" y="678" width="408" height="36" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="701" font-size="13.5" fill="#2b2b2b">Workflow 状态（工作流状态）</text>
+
+<rect x="56" y="722" width="408" height="36" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="745" font-size="13.5" fill="#2b2b2b">Context / Compaction（上下文与压缩）</text>
+
+<!-- ===== 左：④ 交互 ===== -->
+<rect x="56" y="776" width="4" height="14" fill="#BA7517"/>
+<text x="68" y="788" font-size="12.5" font-weight="bold" fill="#8a5a00">④ 交互　跟随 Preset</text>
+<rect x="56" y="794" width="408" height="24" rx="8" fill="#fff" stroke="#E6D3AE" stroke-width="0.6"/>
+<text x="74" y="811" font-size="13" fill="#2b2b2b">Interaction（用户交互）</text>
+
+<!-- ===== 右：执行方（与左侧 5 个工具水平对齐） ===== -->
+<rect x="696" y="352" width="4" height="14" fill="#378ADD"/>
+<text x="708" y="364" font-size="12.5" font-weight="bold" fill="#185FA5">执行方　替模型真正干活（与左侧橙色一一对应）</text>
+
+<rect x="696" y="374" width="408" height="36" rx="8" fill="#E3F0FC" stroke="#7FB0E0" stroke-width="0.9"/>
+<text x="714" y="397" font-size="13" fill="#2b2b2b">filesystem service + policy（文件系统服务与策略）</text>
+
+<rect x="696" y="418" width="408" height="36" rx="8" fill="#E3F0FC" stroke="#7FB0E0" stroke-width="0.9"/>
+<text x="714" y="441" font-size="13" fill="#2b2b2b">shell / subprocess executor（Shell 与子进程执行器）</text>
+
+<rect x="696" y="462" width="408" height="36" rx="8" fill="#E3F0FC" stroke="#7FB0E0" stroke-width="0.9"/>
+<text x="714" y="485" font-size="13" fill="#2b2b2b">web service / provider（联网服务与提供方）</text>
+
+<rect x="696" y="506" width="408" height="36" rx="8" fill="#E3F0FC" stroke="#7FB0E0" stroke-width="0.9"/>
+<text x="714" y="529" font-size="13" fill="#2b2b2b">goal service（目标服务）</text>
+
+<rect x="696" y="550" width="408" height="36" rx="8" fill="#E3F0FC" stroke="#7FB0E0" stroke-width="0.9"/>
+<text x="714" y="573" font-size="12.5" fill="#2b2b2b">subagent registry / providers（子 Agent 注册与提供）</text>
+
+<!-- 箭头 5 条水平直线 -->
+<g stroke="#D85A30" stroke-width="1.6" fill="none" marker-end="url(#ar)">
+  <line x1="468" y1="392" x2="688" y2="392"/>
+  <line x1="468" y1="436" x2="688" y2="436"/>
+  <line x1="468" y1="480" x2="688" y2="480"/>
+  <line x1="468" y1="524" x2="688" y2="524"/>
+  <line x1="468" y1="568" x2="688" y2="568"/>
 </g>
 
-<g font-size="13.5" fill="#2b2b2b">
-  <rect x="580" y="165" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="188">Tool Registry</text>
-  <text x="924" y="188" text-anchor="end" font-size="11.5" fill="#5a7fa6">共享 · 常驻</text>
+<!-- ===== 右：共享设施（移到底部，避免与组标题重叠） ===== -->
+<rect x="696" y="612" width="4" height="14" fill="#378ADD"/>
+<text x="708" y="624" font-size="12.5" font-weight="bold" fill="#185FA5">共享设施　共享 · 常驻（shared infrastructure）</text>
 
-  <rect x="580" y="209" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="232">filesystem service + policy</text>
-  <text x="924" y="232" text-anchor="end" font-size="11.5" fill="#5a7fa6">执行方</text>
+<rect x="696" y="634" width="408" height="36" rx="8" fill="#fff" stroke="#BBD7F2" stroke-width="0.6"/>
+<text x="714" y="657" font-size="13.5" fill="#2b2b2b">Tool Registry（工具注册表）</text>
 
-  <rect x="580" y="253" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="276">shell / subprocess executor</text>
-  <text x="924" y="276" text-anchor="end" font-size="11.5" fill="#5a7fa6">执行方</text>
+<rect x="696" y="678" width="408" height="36" rx="8" fill="#fff" stroke="#BBD7F2" stroke-width="0.6"/>
+<text x="714" y="701" font-size="13.5" fill="#2b2b2b">Model Route（模型路由）</text>
 
-  <rect x="580" y="297" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="320">web service / provider</text>
-  <text x="924" y="320" text-anchor="end" font-size="11.5" fill="#5a7fa6">执行方</text>
+<rect x="696" y="722" width="408" height="36" rx="8" fill="#fff" stroke="#BBD7F2" stroke-width="0.6"/>
+<text x="714" y="745" font-size="13.5" fill="#2b2b2b">Persistence（持久化存储）</text>
 
-  <rect x="580" y="341" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="364">goal service</text>
-  <text x="924" y="364" text-anchor="end" font-size="11.5" fill="#5a7fa6">执行方</text>
+<rect x="696" y="766" width="408" height="36" rx="8" fill="#fff" stroke="#BBD7F2" stroke-width="0.6"/>
+<text x="714" y="789" font-size="13.5" fill="#2b2b2b">Sandbox / Approval（沙箱与审批）</text>
 
-  <rect x="580" y="385" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="408">subagent registry / providers</text>
-  <text x="924" y="408" text-anchor="end" font-size="11.5" fill="#5a7fa6">执行方</text>
-
-  <rect x="580" y="429" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="452">Model Route</text>
-  <text x="924" y="452" text-anchor="end" font-size="11.5" fill="#5a7fa6">共享 · 常驻</text>
-
-  <rect x="580" y="473" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="496">Persistence</text>
-  <text x="924" y="496" text-anchor="end" font-size="11.5" fill="#5a7fa6">共享 · 常驻</text>
-
-  <rect x="580" y="517" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="540">Sandbox / Approval</text>
-  <text x="924" y="540" text-anchor="end" font-size="11.5" fill="#5a7fa6">执行边界</text>
-
-  <rect x="580" y="561" width="360" height="36" rx="8" fill="#fff" stroke="#a8c8ea" stroke-width="0.8"/>
-  <text x="596" y="584">shared infrastructure</text>
-  <text x="924" y="584" text-anchor="end" font-size="11.5" fill="#5a7fa6">共享 · 常驻</text>
-</g>
-
-<g stroke="#8a8578" stroke-width="1.2" fill="none" marker-end="url(#ar)">
-  <line x1="422" y1="315" x2="556" y2="227"/>
-  <line x1="422" y1="359" x2="556" y2="271"/>
-  <line x1="422" y1="403" x2="556" y2="315"/>
-  <line x1="422" y1="447" x2="556" y2="359"/>
-  <line x1="422" y1="491" x2="556" y2="403"/>
-</g>
-
-<text x="500" y="760" text-anchor="middle" font-size="14" font-weight="bold" fill="#2b2b2b">分工原则，不是物理边界：Agent 侧决定"给不给模型看、怎么看"，Host 侧决定"谁真正执行"</text>
-<text x="500" y="786" text-anchor="middle" font-size="12" fill="#8a8578">依据本书图 3-2 / 图 3-4 绘制 · Standard 10 项组合项（3.3 节）展开为 12 个标注条目，其中 5 项需跨层映射</text>
+<rect x="40" y="840" width="1080" height="44" rx="10" fill="#FBF7EE" stroke="#E6D3AE" stroke-width="0.8"/>
+<text x="580" y="867" text-anchor="middle" font-size="14" font-weight="bold" fill="#2b2b2b">左边决定"模型手里有什么、怎么用"，右边决定"这些东西由谁真正执行"</text>
 </svg>
 </body>
 </html>

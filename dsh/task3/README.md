@@ -8,21 +8,21 @@
 
 - [notes.md](./notes.md) —— 骨架笔记（学习目标 / 学习策略 / 四概念 / 三个判断 / 表 3-1 四类组合项 / 官方自测 3 问 / 参考作业）
 - [concepts.html](./concepts.html) —— 单章概念讲解（讲解式 9 节：先例子后结论，每节一句话记忆 + 自测遮答案）
-- [homework.html](./homework.html) —— 作业①：Host Plane / Agent Plane 分层图（Standard 10 项组合项 → 12 个标注条目，可直接截图）
+- [homework.html](./homework.html) —— 作业①：Host Plane / Agent Plane 分层图（左 12 项按 4 类分组、右 9 项分共享/执行方，英文术语均带中文翻译，可直接截图）
 
-## 本章无跑实验，有画图作业
+## 本章无实验，有画图作业
 
 第 3 章是纯概念章，没有让跑代码；产出是笔记 + 分层图。用 Task2 的实验结果当"实物"对照理解。
 
 ## 学习目标完成度
 
-| 目标 | 状态 |
-|---|---|
-| 说清 4 套 Preset 不是 4 个 Agent | ✅ 笔记第二节 |
-| 区分 Preset / Scope / Host Plane / Agent Plane | ✅ 笔记第一节 |
-| 解释 Scope Context 与边界 | ✅ 笔记第四、五节 |
-| 分析 Standard 能力基线与作用域 | ✅ 笔记第六节 + 分层图 |
-| 对比 PTC 与 Minimal | ✅ 笔记第七、八节 |
+| 目标                                           | 状态                   |
+| ---------------------------------------------- | ---------------------- |
+| 说清 4 套 Preset 不是 4 个 Agent               | ✅ 笔记第二节          |
+| 区分 Preset / Scope / Host Plane / Agent Plane | ✅ 笔记第一节          |
+| 解释 Scope Context 与边界                      | ✅ 笔记第四、五节      |
+| 分析 Standard 能力基线与作用域                 | ✅ 笔记第六节 + 分层图 |
+| 对比 PTC 与 Minimal                            | ✅ 笔记第七、八节      |
 
 ## 速记
 
@@ -34,9 +34,9 @@
 
 ## 交付清单
 
-| 任务要求 | 落在哪 |
-|---|---|
-| 学习目标 5 条 | notes.md 开头 + 本页完成度表 |
-| 参考作业① 分层图 | homework.html |
-| 参考作业② 两类需求 | notes.md「参考作业」 |
-| 自测 3 问 | notes.md「官方自测 3 问」+ concepts.html 第 8 节 |
+| 任务要求           | 位置                                             |
+| ------------------ | ------------------------------------------------ |
+| 学习目标 5 条      | notes.md 开头 + 本页完成度表                     |
+| 参考作业① 分层图   | homework.html                                    |
+| 参考作业② 两类需求 | notes.md「参考作业」                             |
+| 自测 3 问          | notes.md「官方自测 3 问」+ concepts.html 第 8 节 |
