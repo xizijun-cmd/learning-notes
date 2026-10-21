@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task3 · "一切皆插件"意味着什么 —— 单章概念讲解</title>
+<style>
+:root{--bg:#faf8f3;--ink:#2b2b2b;--muted:#6b6b6b;--line:#e6e0d4;--card:#fff;--accent:#e8902a;--accent-bg:#fff3e0;--blue:#4a7ddb;--red:#c0392b}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.85}
+h1,h2,h3{font-family:Georgia,"Songti SC","SimSun",serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+section{padding:56px 0 8px}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.on{opacity:1;transform:none}
+nav{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:10px 24px}
+nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:999px}
+nav a:hover{background:var(--accent-bg);color:var(--accent)}
+nav .brand{font-weight:bold;color:var(--ink);margin-right:auto}
+.hero{padding:76px 0 30px;text-align:center}
+.hero .tag{display:inline-block;font-size:13px;color:var(--accent);background:var(--accent-bg);border:1px solid #f0d5ae;padding:4px 14px;border-radius:999px;margin-bottom:20px}
+.hero h1{font-size:37px;line-height:1.32;margin-bottom:14px}
+.hero p.sub{color:var(--muted);font-size:16px;margin-bottom:28px}
+.core{max-width:780px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:22px 26px;text-align:left}
+.core b{color:var(--accent)}
+.kicker{font-size:13px;letter-spacing:2px;color:var(--accent);font-weight:bold;margin-bottom:8px}
+h2{font-size:27px;margin-bottom:14px;line-height:1.4}
+p{color:#3a3a3a}
+p.lead{margin-bottom:12px}
+.eg{background:#fbfaf6;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:14.5px}
+.eg b{color:var(--blue)}
+.oneline{margin-top:16px;background:var(--accent-bg);border:1px dashed #e8b96f;border-radius:10px;padding:12px 16px;font-size:15px}
+.oneline b{color:#b96f00}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}.hero h1{font-size:28px}}
+code{background:#f1ede3;border-radius:5px;padding:1px 6px;font-size:.92em;font-family:Consolas,monospace}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:14px;margin-top:12px}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f3efe6}
+.two-ext .card{border-top:4px solid var(--red)}
+.two-ext h3{margin-top:0;font-size:16px;color:var(--red)}
+.two-ext p{font-size:14px}
+details.quiz{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+details.quiz summary{cursor:pointer;padding:15px 20px;font-size:15.5px;font-weight:bold;list-style:none;display:flex;gap:10px}
+details.quiz summary::before{content:"👉";font-size:13px}
+details.quiz summary .qn{color:var(--accent);font-size:13px;flex:none}
+details.quiz .ans{padding:12px 20px 18px 44px;font-size:14.5px;border-top:1px dashed var(--line)}
+.quizhint{font-size:13px;color:var(--muted);margin-bottom:14px}
+.memo{counter-reset:m;list-style:none;margin-top:8px}
+.memo li{position:relative;padding:11px 15px 11px 50px;background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:9px;font-size:15px}
+.memo li::before{counter-increment:m;content:counter(m);position:absolute;left:13px;top:11px;width:25px;height:25px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.nextstep{background:#fff9ec;border:1px solid #ecd9ae;border-radius:14px;padding:20px 24px;margin-top:22px;font-size:15px}
+.nextstep b{color:#b96f00}
+footer{margin-top:56px;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">DSH · Task3</a>
+    <a href="#s1">为啥不是4个Agent</a>
+    <a href="#s2">怎么分两层</a>
+    <a href="#s3">不分层会怎样</a>
+    <a href="#s4">作用域</a>
+    <a href="#s5">Standard</a>
+    <a href="#s6">PTC</a>
+    <a href="#s7">Minimal</a>
+    <a href="#s8">自测</a>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="tag">DeepSeek Harness 技术入门 · 第 3 章</div>
+  <h1>为什么 4 套 Preset，<br>不是 4 个 Agent？</h1>
+  <p class="sub">这一章只回答这一个问题。答案你其实已经见过——只是没被点破。</p>
+  <div class="core">
+    <b>核心一句话：</b>共享的放 <b>Host Plane</b>，各会话的放 <b>Agent Scope</b>，Preset 只是一张<b>配置单</b>。<br>
+    "一切皆插件"不是"东西随便换"，而是<b>每项能力都有明确的归属</b>。
+  </div>
+</header>
+
+<section class="wrap reveal" id="s1">
+  <div class="kicker">01 · 先破一个误解</div>
+  <h2>4 套 Preset ≠ 4 个 Agent</h2>
+  <p class="lead">第一次读这章，很容易以为：既然 4 套 Preset 能力不同，那应该是 4 个 Agent、4 套代码、4 个循环。书里明确否定了这个理解。</p>
+  <div class="eg">
+    <b>想想你 Task2 干过的事：</b>你在浏览器里开了 4 个 Session，分别选 Standard / PTC / Minimal / Creative。<br>
+    你启动了几次 DSH？<b>一次。</b>模型配置是同一份，工具注册表是同一份，存储也是同一份。<br>
+    你只是给每个 Session <b>挂了一张不同的配置单</b>。
+  </div>
+  <p class="lead">书里原文说：Host 里保留一套<b>共享的常驻组合</b>（模型、注册机制、持久化），某个 Session 进入自己的 Agent 作用域后，再挂载对应 Preset 提供的工具、提示词和会话级能力。</p>
+  <p class="lead">换句话说，<b>Preset 定义的不是"一个 Agent 是谁"，而是"这个会话要挂哪些能力"。</b></p>
+  <div class="oneline"><b>一句话记忆：</b>一个进程，一套地基；三间房，三种装修。Preset 是装修单，不是房子。</div>
+</section>
+
+<section class="wrap reveal" id="s2">
+  <div class="kicker">02 · 那两层到底怎么分</div>
+  <h2>Host 管"怎么有"，Agent 管"怎么用"</h2>
+  <p class="lead">先给一个类比，别急着记术语。</p>
+  <div class="eg">
+    <b>一栋写字楼。</b><br>
+    <b>Host Plane</b> = 大楼的水电、电梯、门禁、财务、IT 机房。全楼共用，不用每家公司自己建一套。<br>
+    <b>Agent Plane</b> = 每家公司自己的内部规矩：岗位怎么设、流程怎么走、员工能进哪些房间。
+  </div>
+  <table>
+    <tr><th></th><th>Host Plane（宿主层）</th><th>Agent Plane（会话层）</th></tr>
+    <tr><td><b>回答什么</b></td><td>系统怎么<b>提供、统一管理</b>能力</td><td>当前会话怎么<b>选择、组合、呈现</b>能力</td></tr>
+    <tr><td><b>有什么</b></td><td>Tool Registry、Persistence、Model Route、Sandbox、Subagent Registry</td><td>Persona、Prompt、Tool 暴露与呈现、Agent 本地服务</td></tr>
+  </table>
+  <h3>关键：一个 Tool 要拆成两半看</h3>
+  <p class="lead">这是最容易搞混的地方。别问"这个工具属于哪一层"，要问"这件事属于哪一层"：</p>
+  <div class="eg">
+    <b>拿 write 来说：</b><br>
+    "真正把内容写进磁盘"——<b>Host</b> 的事（filesystem service + policy）。<br>
+    "模型能不能看见 write、它叫什么名字、参数怎么填"——<b>Agent</b> 的事。
+  </div>
+  <p class="lead">所以书里反复强调：这是<b>分工原则</b>，不是绝对物理边界。不是去代码里找"这个工具在哪个文件夹"，而是看"这件事由谁负责"。</p>
+  <div class="oneline"><b>一句话记忆：</b>Host 管"怎么有"，Agent 管"怎么用"。</div>
+</section>
+
+<section class="wrap reveal" id="s3">
+  <div class="kicker">03 · 为什么非要分层</div>
+  <h2>不分层，会掉进两个坑</h2>
+  <p class="lead">假设不做这个分层，只有两条路可走，两条都疼。</p>
+  <div class="grid2 two-ext">
+    <div class="card">
+      <h3>坑一：全放全局</h3>
+      <p>就像办公室里只有一张公共桌子，谁放东西都影响别人。<br><br>
+      Session A 加了个 Tool，Session B 突然也能看见——轻则干扰，重则同名撞车。</p>
+    </div>
+    <div class="card">
+      <h3>坑二：每个都起一套</h3>
+      <p>就像 4 个人各买一台打印机、各拉一条网线。<br><br>
+      模型路由、持久化、沙箱、子 Agent 注册中心全部重复建——贵，而且没法统一管理。</p>
+    </div>
+  </div>
+  <p class="lead" style="margin-top:16px">DSH 选的是中间路线：<b>Host 持有一份"全进程唯一"的能力，各 Agent Scope 挂自己那份 Preset 贡献。</b>该共享的共享，该各自的各自。</p>
+  <div class="oneline"><b>一句话记忆：</b>共享的共享，各自的各自——这不是折中，是唯一能同时保住"隔离"和"省成本"的办法。</div>
+</section>
+
+<section class="wrap reveal" id="s4">
+  <div class="kicker">04 · 作用域：动态组合的边界</div>
+  <h2>一项能力，必须先回答三个问题</h2>
+  <p class="lead">Preset 能按会话动态挂能力，但能力不会自动变成全进程可见。每挂一项，都得问清楚：</p>
+  <div class="grid2" style="margin-top:12px">
+    <div class="card"><h3 style="margin-top:0;font-size:16px">① 属于谁？</h3><p style="font-size:14px">只服务当前会话，还是全进程共享？</p></div>
+    <div class="card"><h3 style="margin-top:0;font-size:16px">② 谁能看见？</h3><p style="font-size:14px">注册在当前作用域，就只对当前会话可见。</p></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3 style="margin-top:0;font-size:16px">③ 跟谁一起销毁？</h3><p style="font-size:14px">会话结束就回收，还是跟进程一样常驻？</p></div>
+  <h3>用你自己答对的那道题验证</h3>
+  <div class="eg">
+    问：在 Standard 的 Session 里临时加一个 Skill，PTC 的 Session 会不会也有？<br>
+    答：<b>不会</b>。因为它注册在 Standard 自己的 Agent Scope 里，PTC 的作用域看不见它。<br>
+    补一句：但这个 Skill 真要干活时依赖的文件系统、Shell，仍然在 Host——<b>注册在 Agent，执行靠 Host。</b>
+  </div>
+  <p class="lead">注册错了会怎样？把"只该当前会话用"的服务注册成全局，它就变成所有 Session 都能访问，还可能和别人的同名服务打架。</p>
+  <div class="oneline"><b>一句话记忆：</b>能力不是天生全局可见——看它注册在哪个作用域。</div>
+</section>
+
+<section class="wrap reveal" id="s5">
+  <div class="kicker">05 · Standard 为什么是"基线"</div>
+  <h2>不是数插件，是给每项能力标归属</h2>
+  <p class="lead">Standard 是能力最全的一套（读写、命令、搜索、规划、子 Agent 都有），所以它适合当参照系。但看书时别数"有多少个插件"，要问每项能力三个问题：<b>属于哪个作用域？由谁提供？向谁开放？</b></p>
+  <table>
+    <tr><th>类别</th><th>管什么</th><th>归属</th></tr>
+    <tr><td>角色与提示词</td><td>人设、行为方式、提示内容</td><td>跟 Agent / Preset</td></tr>
+    <tr><td>面向模型的工具</td><td>暴露哪些 Tool 给模型</td><td>跟 Agent / Preset</td></tr>
+    <tr><td>会话级状态</td><td>Plan / Goal / Workflow 的运行状态</td><td>跟 Agent / Session</td></tr>
+    <tr><td>Host 能力适配项</td><td>把 Host 已有能力接进当前会话</td><td>Host 提供、Agent 消费</td></tr>
+  </table>
+  <p class="lead" style="margin-top:14px">书里图 3-4 最有意思：模型看到的每一个工具，背后都站着一个 Host 的服务。比如模型看到 <code>tool-fs</code>，真正干活的是 Host 的 <code>filesystem service + policy</code>；看到 <code>tool-bash</code>，背后是 <code>shell executor</code>。</p>
+  <div class="eg">
+    <b>这解释了为什么很多自定义 Agent 越做越复杂：</b><br>
+    一开始没把两类问题分开——"模型能看到什么"（Agent）和"底层谁执行"（Host）。<br>
+    结果在错误的层上改东西，越改越乱。
+  </div>
+  <p class="lead">所以设计自定义 Preset 的实用口诀是：<b>先判断改哪一层，再决定改什么。</b></p>
+  <p class="lead">"这个会话不许写文件" → 改 Agent（调工具集）；"所有文件操作必须进远程容器" → 改 Host（换 FS 和沙箱 Provider）。</p>
+  <div class="oneline"><b>一句话记忆：</b>先问改哪层，再问改什么。</div>
+</section>
+
+<section class="wrap reveal" id="s6">
+  <div class="kicker">06 · PTC：同一批工具，换了个用法</div>
+  <h2>不是"多了个 run_code"，是换了个门面</h2>
+  <p class="lead">先回忆你 Task2 的那个红色报错。</p>
+  <div class="eg">
+    PTC 里直接调 write → <b>UNKNOWN_TOOL</b>。模型愣了两下，改口说"我得在 run_code 里调"，然后成功了。<br><br>
+    write 被删了吗？<b>没有。</b>它只是从"摆在货架上"挪进了"柜子里"。
+  </div>
+  <p class="lead">这就是书里说的 <b>Tool Presentation</b>（工具呈现方式）：系统里有哪些工具（Tool Registry，在 Host，没变）和工具以什么形式给模型（Presentation，在 Agent，可变）是两件事。</p>
+  <div class="grid2" style="margin-top:12px">
+    <div class="card"><h3 style="margin-top:0;font-size:16px">传统：Native Tool Calling</h3><p style="font-size:14px">模型看到 JSON 格式的工具说明，一步一调：LLM → 工具 A → LLM → 工具 B → LLM……</p></div>
+    <div class="card"><h3 style="margin-top:0;font-size:16px">PTC：Code Presentation</h3><p style="font-size:14px">模型看到一套 TypeScript SDK，直接写一段程序：循环、判断、并行都写在代码里，交给 run_code 跑。</p></div>
+  </div>
+  <p class="lead" style="margin-top:14px">源码层面差异极小：<code>code/agent.cordis.yml</code> 基本沿用 Standard 的组合，只加了一句 <code>mode: code</code>。</p>
+  <h3>但别误会：减少往返 ≠ 一定更快</h3>
+  <p class="lead">书里特别提醒：减少 round trip 是<b>设计目标</b>，不是性能保证。取决于任务适不适合程序化编排、模型写代码的水平、工具返回的数据量。</p>
+  <div class="eg">
+    你的 Task2 就是反例：PTC 跑了 <b>4 轮、12+ 次调用</b>，反而是四套里最重的——因为任务太简单，写代码的准备工作比直接调还贵。
+  </div>
+  <div class="oneline"><b>一句话记忆：</b>不换工具，只换用法。</div>
+</section>
+
+<section class="wrap reveal" id="s7">
+  <div class="kicker">07 · Minimal：不是弱版，是显微镜</div>
+  <h2>它故意把自己做薄</h2>
+  <p class="lead">看到 Minimal 只有固定 Prompt、持久 Bash、str_replace_editor，第一反应是"这是阉割版 Standard 吧"。书里说不是——它是<b>故意做薄</b>的。</p>
+  <div class="eg">
+    <b>为什么故意做薄？</b><br>
+    因为要当"Model + 极简 Harness"的<b>观察基线</b>：把工具、上下文、运行策略都减到最少，才更容易看清模型本身干得怎么样。<br>
+    这就是 Task2 里官方 Benchmark 选 Minimal 的原因。
+  </div>
+  <p class="lead">但注意一个容易被忽略的点：<b>模型看不见 ≠ 底层不干活。</b>Minimal 里那个持久的终端会话，照样要受 Host 的沙箱策略和命令执行环境约束——安全边界一点没少。</p>
+  <div class="oneline"><b>一句话记忆：</b>模型看见的少，底层的治理还在。</div>
+</section>
+
+<section class="wrap reveal" id="s8">
+  <div class="kicker">08 · 自测</div>
+  <h2>合上页面，先自己说一遍</h2>
+  <p class="quizhint">用法：先口头回答，再点开对照。说不顺的那题，回去看对应小节。</p>
+  <details class="quiz">
+    <summary><span class="qn">Q1</span>DSH 的分层避免了哪两种极端？各自代价是什么？</summary>
+    <div class="ans">坑一全放全局：会话互相干扰、同名冲突（污染与耦合）。坑二每个都起一套：模型路由/持久化/沙箱/注册中心重复建（贵、难管）。DSH 走中间：Host 持一份单例，Agent Scope 挂各自的 Preset。</div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q2</span>"会话 A 新增的 Tool 影响到会话 B"——问题出在哪一层？</summary>
+    <div class="ans">出在 <b>Scope</b>：这个 Tool 本该注册在 A 的 Agent Scope 内，却被注册到了全局/共享范围。修法：在 Agent Plane 里把它注册回自己的作用域，跟 A 一起创建和销毁。</div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q3</span>PTC 与 Standard 在源码层面的差异有多小？改变的是什么？</summary>
+    <div class="ans">极小：基本沿用 Standard 组合，只加 Tool Presentation（<code>mode: code</code>）和 Code Mode SDK。改变的是"模型看到和使用工具的方式"，Tool Registry 仍在 Host，能力没有重写。</div>
+  </details>
+</section>
+
+<section class="wrap reveal" id="s9">
+  <div class="kicker">09 · 速记</div>
+  <h2>合上书，记住这 7 条</h2>
+  <ol class="memo">
+    <li>4 套 Preset ≠ 4 个 Agent：一个 Host + 各自的 Agent Scope</li>
+    <li>Host 管"怎么有"，Agent 管"怎么用"——分工，不是物理边界</li>
+    <li>不分层两条路都疼：全放全局会串，各起一套太贵</li>
+    <li>作用域三问：属于谁 / 谁能看见 / 跟谁一起销毁</li>
+    <li>能力拥有 ≠ 使用方式：PTC 换呈现，不换工具</li>
+    <li>减少往返是目标，不是性能保证（你的 PTC 4 轮就是反例）</li>
+    <li>Minimal 是观察基线：模型看见的少，底层治理还在</li>
+  </ol>
+  <div class="nextstep">
+    <b>下一步（Task4 预告）</b>：本章只露了 Cordis 的一角——依赖缺失时组件会停在 PENDING。下一站讲 Context / Service / Event / Effect / Lifecycle：插件之间怎么声明依赖、生命周期由谁管。
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    依据：《DeepSeek Harness 技术入门与架构原理》第 3 章（3.1–3.5）<br>
+    承接 <a href="../task2/concepts.html" style="color:var(--accent);text-decoration:underline">Task2 概念页</a> · 结合个人学习笔记整理生成 · 单文件离线网页
+  </div>
+</footer>
+
+<script>
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

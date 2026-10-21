@@ -106,3 +106,5 @@
 3. 亲手加一个能力（Skill/Tool/Hook），真正理解"一切皆插件"。
 
 → 对应学习路径第 3–5 步「亲手加能力 → Everything is a Plugin → Cordis」。
+
+> **已在 Task3 解答**：Preset 差异在「Host Plane 提供、Agent Plane 组合呈现」这一层实现；4 套 Preset 不是 4 个 Agent，而是同一 Host 的不同配置单。→ [进入 Task3](../task3/)

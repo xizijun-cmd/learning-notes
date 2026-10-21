@@ -38,6 +38,8 @@ learning-notes/
   - 核心一句话：模型只生成 Token，Harness 把"说"变成"做"——DSH 开放的是组织方式，不是具体内容。
 - **Task2 · 从零开始运行 DSH**（第 2 章）→ [dsh/task2/](./dsh/task2/)
   - 核心一句话：把 DSH 跑起来，用 UI/Trace 而非模型自述，验证 Preset 到底改了什么。
+- **Task3 · "一切皆插件"意味着什么**（第 3 章）→ [dsh/task3/](./dsh/task3/)
+  - 核心一句话：4 套 Preset 不是 4 个 Agent，而是同一个 Host 上挂载的不同 Agent 组合——共享进 Host，会话进 Scope。
 
 ## 在线阅读
 
@@ -47,3 +49,5 @@ learning-notes/
 - Task1 概念讲解页：https://xizijun-cmd.github.io/learning-notes/dsh/task1/concepts.html
 - Task1 作业A 示意图：https://xizijun-cmd.github.io/learning-notes/dsh/task1/homework-a.html
 - Task2 概念展示页：https://xizijun-cmd.github.io/learning-notes/dsh/task2/concepts.html
+- Task3 概念展示页：https://xizijun-cmd.github.io/learning-notes/dsh/task3/concepts.html
+- Task3 分层图（作业①）：https://xizijun-cmd.github.io/learning-notes/dsh/task3/homework.html
