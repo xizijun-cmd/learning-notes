@@ -43,6 +43,10 @@ learning-notes/
 - **Task4 · 一切皆插件的收尾与前三章复盘**（第 3 章 3.6–3.9）→ [dsh/task4/](./dsh/task4/)
   - 核心一句话：Creative 让 Agent 能改承载自己的 Runtime；而"一切皆插件"不散架，是因为还有只管规则的 Cordis Kernel。
 
+### 综合复习
+
+- **[REVIEW.md](./dsh/REVIEW.md)** —— Task1–4 全部内容的大汇总：九块核心知识、六对关键区分、术语速查、16 条速记、自测汇总、我的实验证据、复习路线
+
 ## 在线阅读
 
 已开启 GitHub Pages：
