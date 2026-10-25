@@ -202,3 +202,5 @@
 
 - **Cordis** 是下一站：Context / Service / Event / Effect / Lifecycle——本章只露了"依赖缺失就 PENDING"一角。
 - 悬念：插件之间怎么声明依赖？生命周期由谁管？→ 对应学习路径第 5 步「理解 Cordis」。
+
+> **已在 Task4 解答**：第 3 章 3.6–3.9 补完（Creative 自修改、4 套 Preset 综合、Cordis Kernel 四条规则、本章小结）。→ [进入 Task4](../task4/)

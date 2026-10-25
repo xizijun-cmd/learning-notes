@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task4 · "一切皆插件"的收尾 —— 单章概念讲解</title>
+<style>
+:root{--bg:#faf8f3;--ink:#2b2b2b;--muted:#6b6b6b;--line:#e6e0d4;--card:#fff;--accent:#e8902a;--accent-bg:#fff3e0;--blue:#4a7ddb;--red:#c0392b;--green:#3d9d63}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;line-height:1.85}
+h1,h2,h3{font-family:Georgia,"Songti SC","SimSun",serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+section{padding:54px 0 8px}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.on{opacity:1;transform:none}
+nav{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:10px 24px}
+nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:999px}
+nav a:hover{background:var(--accent-bg);color:var(--accent)}
+nav .brand{font-weight:bold;color:var(--ink);margin-right:auto}
+.hero{padding:76px 0 30px;text-align:center}
+.hero .tag{display:inline-block;font-size:13px;color:var(--accent);background:var(--accent-bg);border:1px solid #f0d5ae;padding:4px 14px;border-radius:999px;margin-bottom:20px}
+.hero h1{font-size:37px;line-height:1.32;margin-bottom:14px}
+.hero p.sub{color:var(--muted);font-size:16px;margin-bottom:28px}
+.core{max-width:790px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:22px 26px;text-align:left}
+.core b{color:var(--accent)}
+.core .from{font-size:13px;color:var(--muted);margin-top:10px}
+.kicker{font-size:13px;letter-spacing:2px;color:var(--accent);font-weight:bold;margin-bottom:8px}
+h2{font-size:26px;margin-bottom:14px;line-height:1.4}
+h3{font-size:18px;margin:20px 0 10px}
+p{color:#3a3a3a}
+p.lead{margin-bottom:12px}
+.eg{background:#fbfaf6;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:14.5px}
+.eg b{color:var(--blue)}
+.warn{background:#fdf5f3;border-left-color:var(--red)}
+.warn b{color:var(--red)}
+.oneline{margin-top:16px;background:var(--accent-bg);border:1px dashed #e8b96f;border-radius:10px;padding:12px 16px;font-size:15px}
+.oneline b{color:#b96f00}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}.hero h1{font-size:28px}}
+code{background:#f1ede3;border-radius:5px;padding:1px 6px;font-size:.92em;font-family:Consolas,monospace}
+pre{background:#2b2b2b;color:#e8e2d5;border-radius:12px;padding:16px 18px;font-size:13.5px;line-height:1.7;overflow-x:auto;font-family:Consolas,monospace}
+pre .cm{color:#8a8578}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:14px;margin-top:12px}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f3efe6}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0}
+.flow .st{background:var(--accent-bg);border:1px solid #f0d5ae;border-radius:8px;padding:6px 12px;font-size:13px}
+.flow .arw{color:#c9a05a;font-size:16px}
+details.quiz{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+details.quiz summary{cursor:pointer;padding:15px 20px;font-size:15.5px;font-weight:bold;list-style:none;display:flex;gap:10px}
+details.quiz summary::before{content:"👉";font-size:13px}
+details.quiz summary .qn{color:var(--accent);font-size:13px;flex:none}
+details.quiz .ans{padding:12px 20px 18px 44px;font-size:14.5px;border-top:1px dashed var(--line)}
+.quizhint{font-size:13px;color:var(--muted);margin-bottom:14px}
+.memo{counter-reset:m;list-style:none;margin-top:8px}
+.memo li{position:relative;padding:11px 15px 11px 50px;background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:9px;font-size:15px}
+.memo li::before{counter-increment:m;content:counter(m);position:absolute;left:13px;top:11px;width:25px;height:25px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.nextstep{background:#fff9ec;border:1px solid #ecd9ae;border-radius:14px;padding:20px 24px;margin-top:22px;font-size:15px}
+.nextstep b{color:#b96f00}
+footer{margin-top:56px;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">DSH · Task4</a>
+    <a href="#s1">谁在说谁在做</a>
+    <a href="#s2">拆两半</a>
+    <a href="#s3">四种装法</a>
+    <a href="#s4">Creative</a>
+    <a href="#s5">Kernel</a>
+    <a href="#s6">自测</a>
+    <a href="#s7">速记</a>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="tag">第 3 章 3.6–3.9 · 一切皆插件的收尾 + 前三章复盘</div>
+  <h1>"一切皆插件"最后还差一句：<br>它有内核</h1>
+  <p class="sub">Creative 让 Agent 能改自己的底盘；Cordis Kernel 负责让"随便换"不至于散架。</p>
+  <div class="core">
+    <b>核心一句话：</b>Creative 把 Runtime 的组合结构变成了 Agent 可以观察、修改的对象；而真正托住这一切的，是一层<b>只管规则、不管功能</b>的 Cordis Kernel。
+    <div class="from">承接 Task3：本章补第 3 章的后半（Creative、四套 Preset 综合、内核、小结）。</div>
+  </div>
+</header>
+
+<section class="wrap reveal" id="s1">
+  <div class="kicker">01 · 谁在说，谁在做</div>
+  <h2>先把地基打回 Task1</h2>
+  <p class="lead">模型只会生成 Token——它能"说"，不能"做"。中间必须有 Harness 把"说"接成"做"。</p>
+  <div class="eg">
+    <b>你 PTC 见过的那一幕：</b>模型输出"我要调用 write"，没有 Harness 真的去执行，这句话就停在屏幕上，什么也不会发生。<br>
+    这不是死循环——死循环是 Harness 在、但"喊停"坏了。这里是<b>压根没人干活</b>。
+  </div>
+  <div class="oneline"><b>一句话记忆：</b>模型出主意，Harness 跑腿。</div>
+</section>
+
+<section class="wrap reveal" id="s2">
+  <div class="kicker">02 · 把 Harness 拆两半</div>
+  <h2>仓库只有一份，领料单各组不同</h2>
+  <p class="lead">Harness 分两层：<b>Host Plane</b>（共享地基）和 <b>Agent Plane</b>（每会话自己的装配）。</p>
+  <div class="eg">
+    <b>仓库与领料单：</b><br>
+    <b>Tool Registry（工具注册表）</b> = 公司仓库：所有货都在里面，只有一份。<br>
+    <b>给模型的工具清单</b> = 每个项目组的领料单：要哪些、以什么形式领，各组不同。
+  </div>
+  <table>
+    <tr><th>共享（Host）</th><th>各自（Agent）</th></tr>
+    <tr><td>模型路由 Model Route</td><td>提示词 Prompt（Task2 四套内容就不同）</td></tr>
+    <tr><td>工具注册表 Tool Registry</td><td>给模型看哪些工具的清单</td></tr>
+    <tr><td>持久化 Persistence、沙箱 Sandbox</td><td>上下文、会话状态</td></tr>
+  </table>
+  <div class="oneline"><b>一句话记忆：</b>Host 管"怎么有"，Agent 管"怎么用"。</div>
+</section>
+
+<section class="wrap reveal" id="s3">
+  <div class="kicker">03 · 四种装法</div>
+  <h2>4 套 Preset = 同一套零件的 4 种装法</h2>
+  <p class="lead">Preset 不是 Agent，是配置单。Task2 你亲眼看到的差异，全是 Agent Plane 的组合差异：</p>
+  <table>
+    <tr><th>Preset</th><th>定位</th><th>相对 Standard 改了什么</th><th>Task2 证据</th></tr>
+    <tr><td><b>Standard</b></td><td>完整基线</td><td>——</td><td>bash + write 直接可用</td></tr>
+    <tr><td><b>PTC</b></td><td>换 Tool Presentation</td><td>能力不变，交互换成代码（TS 编排）</td><td>直接调 write 报 <b>UNKNOWN_TOOL</b></td></tr>
+    <tr><td><b>Minimal</b></td><td>压到最薄</td><td>只留固定 Prompt + 持久 Bash + str_replace_editor</td><td>没有 write，用 echo 重定向</td></tr>
+    <tr><td><b>Creative</b></td><td>加 Runtime 自引用</td><td>加检查、挂载/卸载、Preset 编写指导</td><td>上下文多出 Skills 声明</td></tr>
+  </table>
+  <div class="eg">
+    <b>一个关键区分：</b>Minimal 的 write 是<b>没进清单</b>（能力没暴露）；PTC 的 write 是<b>换了入口</b>（能力在，得走 run_code）。前者是"不存在"，后者是"存在但换了用法"——判断依据永远是 Trace，不是模型自述。
+  </div>
+  <div class="oneline"><b>一句话记忆：</b>一套零件表，四种装法——角色、提示词、呈现、上下文，全都是可组合的。</div>
+</section>
+
+<section class="wrap reveal" id="s4">
+  <div class="kicker">04 · Creative：能改自己的底盘</div>
+  <h2>从"用能力"到"改能力来源"</h2>
+  <p class="lead">Creative 的"创造"不是写作更有创意。它的目录叫 <code>cordis/</code>，核心是一个动作：<code>cordis_mount</code>——<b>执行模型写的 TypeScript，在运行中的 Runtime 里挂载 / 卸载插件</b>。</p>
+  <div class="flow">
+    <span class="st">Agent</span><span class="arw">→</span>
+    <span class="st">检查 Runtime</span><span class="arw">→</span>
+    <span class="st">生成临时 Plugin</span><span class="arw">→</span>
+    <span class="st">Mount</span><span class="arw">→</span>
+    <span class="st">获得新能力</span><span class="arw">→</span>
+    <span class="st">使用 / 验证</span><span class="arw">→</span>
+    <span class="st">Unmount</span>
+  </div>
+  <p class="lead">这意味着 Agent 不只操作文件和网络，还能操作<b>承载自己的那套组合</b>。"运行一个 Agent"和"设计一个 Agent"的边界因此模糊了。</p>
+  <h3>但有条线不能跨</h3>
+  <div class="eg warn">
+    <b>官方把自修改定义为"信任边界（trust boundary）"，不是"安全沙箱"。</b><br>
+    能改，不代表改完安全、正确、可恢复——这些要靠外面的工程机制兜：权限控制、人工审查、版本管理、测试、恢复。<br>
+    所以别说成"安全的自我进化"。它是<b>高信任能力</b>，不是"不会翻车"。
+  </div>
+  <div class="oneline"><b>一句话记忆：</b>能改自己那份，改不到隔壁，也改不到仓库；正因为改的是自己，出问题没有上一层兜底。</div>
+</section>
+
+<section class="wrap reveal" id="s5">
+  <div class="kicker">05 · Cordis Kernel：不散架的规则</div>
+  <h2>"一切皆插件"还差最后一块</h2>
+  <p class="lead">如果什么都是插件，那"插件怎么组合"这件事本身谁管？这就是 Cordis Kernel 的存在理由——它只管四条规则，而且<b>这四条不属于任何 Preset</b>：</p>
+  <div class="grid2" style="margin-top:12px">
+    <div class="card"><h3 style="margin-top:0;font-size:16px">① 挂载与卸载</h3><p style="font-size:14px">插件怎么进来、怎么出去</p></div>
+    <div class="card"><h3 style="margin-top:0;font-size:16px">② 能力发现与依赖</h3><p style="font-size:14px">谁依赖谁，按什么顺序起</p></div>
+    <div class="card"><h3 style="margin-top:0;font-size:16px">③ 事件传递</h3><p style="font-size:14px">插件之间怎么说话</p></div>
+    <div class="card"><h3 style="margin-top:0;font-size:16px">④ 资源清理</h3><p style="font-size:14px">退出时占着的东西怎么回收</p></div>
+  </div>
+  <h3>为什么"挂载"本身不能是插件</h3>
+  <div class="eg">
+    挂载管的是"插件怎么组合"这件事本身。如果"管组合"的规则也能被组合掉，就没有任何稳定的东西来保证组合的正确性。<br><br>
+    两个类比：<b>裁判不能由参赛队自己换</b>；<b>量长度的尺子不能是随时会缩的</b>。
+  </div>
+  <h3>微内核类比：哪里对，哪里不对</h3>
+  <table>
+    <tr><th>对</th><th>不对</th></tr>
+    <tr><td>核心精简、功能外置的设计思路相通</td><td>DSH 不是 OS 微内核——没有进程/内存/设备管理，只是 Agent Runtime 的插件体系</td></tr>
+  </table>
+  <div class="oneline"><b>一句话记忆：</b>插件是能换的零件，内核是换零件时"不散架"的规则——规则本身不能是零件。</div>
+</section>
+
+<section class="wrap reveal" id="s6">
+  <div class="kicker">06 · 自测</div>
+  <h2>合上页面，先自己说一遍</h2>
+  <p class="quizhint">用法：先口头回答，再点开对照。</p>
+  <details class="quiz">
+    <summary><span class="qn">Q1</span>cordis_mount 做了什么？为什么说 Creative 让 Runtime 本身成为可操作对象？</summary>
+    <div class="ans">它执行模型生成的 TypeScript，并在当前运行的 Runtime 里挂载 / 卸载插件。Agent 因此能在运行期间检查并调整承载自己的组合结构——从"使用能力"升级为"改造能力来源"，所以 Runtime 本身成了可操作对象。</div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q2</span>Cordis Kernel 负责哪些"不属于任何 Preset"的规则？</summary>
+    <div class="ans">插件的挂载与卸载、能力的发现与依赖、事件的传递、资源退出时的清理。这些是稳定运行的基础语义，不属于 Standard / PTC / Minimal / Creative 任何一套。</div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q3</span>"DSH 就是微内核操作系统"，这个类比哪里对、哪里不对？</summary>
+    <div class="ans">对：核心精简、功能外置的思路相通。不对：它不是 OS 微内核，没有进程/内存/设备管理那一层；它是 Agent Runtime 的插件体系。类比只能说明思路，不能当成同一类系统。</div>
+  </details>
+  <details class="quiz">
+    <summary><span class="qn">Q4</span>Task2 观察到的 4 套 Preset 差异，现在能用 Task3/4 的概念解释了吗？</summary>
+    <div class="ans">能。差异的本质是：<b>同一个 Tool Registry（Host）</b>，四套 Preset 在 <b>Agent Plane</b> 的组合不同——Standard 完整装配、PTC 换 Tool Presentation、Minimal 裁剪 Prompt/Tools/Context、Creative 加 Runtime 自引用。不是 4 个 Agent 在跑。</div>
+  </details>
+</section>
+
+<section class="wrap reveal" id="s7">
+  <div class="kicker">07 · 速记 + 前三章串讲</div>
+  <h2>合上书，记住这 7 条</h2>
+  <ol class="memo">
+    <li>Creative 的"创造" = 改承载自己的 Runtime，不是写得更有创意</li>
+    <li>cordis_mount：执行模型写的 TS → 挂载 / 卸载插件</li>
+    <li>自修改是<b>信任边界</b>，不是安全沙箱</li>
+    <li>4 套 Preset = 同一套零件表的 4 种装法（角色/提示词/呈现/上下文都可组合）</li>
+    <li>Kernel 管 4 件事：挂载卸载、能力发现与依赖、事件传递、资源清理</li>
+    <li>微内核类比：思路对，系统类型不对</li>
+    <li>一切皆插件 ≠ 没有内核；规则本身不能是零件</li>
+  </ol>
+  <div class="nextstep">
+    <b>前三章串成一条线</b>：模型只会说（Task1）→ Harness 拆两半（Host 提供 / Agent 装配）→ Preset 是配置单（Task2/3 四种装法）→ Creative 能改自己那份 → Kernel 守住不散架的规则（Task4）。
+    <br><br><b>下一步（第 4 章预告）</b>：亲手写 Skill / Tool / Hook——把前四章的概念落到一行行代码上。
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    依据：《DeepSeek Harness 技术入门与架构原理》第 3 章 3.6–3.9（Creative / 综合 / Kernel / 小结）<br>
+    承接 <a href="../task3/concepts.html" style="color:var(--accent);text-decoration:underline">Task3 概念页</a> · 结合个人学习笔记与五站讨论整理生成 · 单文件离线网页
+  </div>
+</footer>
+
+<script>
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

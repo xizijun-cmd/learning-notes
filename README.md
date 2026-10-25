@@ -40,6 +40,8 @@ learning-notes/
   - 核心一句话：把 DSH 跑起来，用 UI/Trace 而非模型自述，验证 Preset 到底改了什么。
 - **Task3 · "一切皆插件"意味着什么**（第 3 章）→ [dsh/task3/](./dsh/task3/)
   - 核心一句话：4 套 Preset 不是 4 个 Agent，而是同一个 Host 上挂载的不同 Agent 组合——共享进 Host，会话进 Scope。
+- **Task4 · 一切皆插件的收尾与前三章复盘**（第 3 章 3.6–3.9）→ [dsh/task4/](./dsh/task4/)
+  - 核心一句话：Creative 让 Agent 能改承载自己的 Runtime；而"一切皆插件"不散架，是因为还有只管规则的 Cordis Kernel。
 
 ## 在线阅读
 
@@ -51,3 +53,5 @@ learning-notes/
 - Task2 概念展示页：https://xizijun-cmd.github.io/learning-notes/dsh/task2/concepts.html
 - Task3 概念展示页：https://xizijun-cmd.github.io/learning-notes/dsh/task3/concepts.html
 - Task3 分层图（作业①）：https://xizijun-cmd.github.io/learning-notes/dsh/task3/homework.html
+- Task4 概念展示页：https://xizijun-cmd.github.io/learning-notes/dsh/task4/concepts.html
+- Task4 概念地图（作业A）：https://xizijun-cmd.github.io/learning-notes/dsh/task4/homework-a.html
